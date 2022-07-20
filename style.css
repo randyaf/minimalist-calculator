@@ -1,0 +1,28 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: #0a0a17;
+}
+
+.container {
+    display: flex;
+    background-color: #192d34;
+    margin: 0 auto;
+    width: 700px;
+    height: 100vh;
+}
+
+.button {
+    color: #dff8fc;
+    background-color: #51c4a2;
+    border: 0;
+}
+
+.inner-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
