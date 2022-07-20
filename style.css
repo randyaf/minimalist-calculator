@@ -72,14 +72,17 @@ body {
 
 .one-to-nine .button {
     /* min-width: 170px; */
+    flex-basis: calc(100% / 3);
     width: auto;
 }
 
 .number-button-container .zero-and-period {
     display: flex;
+    flex: 1;
 }
 .zero-and-period button {
     flex: 1;
+    height: 100%;
 }
 
 
