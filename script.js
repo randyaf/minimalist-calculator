@@ -52,6 +52,8 @@ operatorContainer.addEventListener("click", event => {
             operator = "+";
         } else if (event.target.getAttribute("value") === "-") {
             operator = "-";
+        } else if (event.target.getAttribute("value") === "=") {
+            calculate();
         }
     }
     console.log(inputtedNumber);
@@ -61,15 +63,15 @@ operatorContainer.addEventListener("click", event => {
 
 
 function addition(firstNumber, secondNumber) {
-    if(typeof firstNumber === Number && typeof secondNumber === number) {
+    if(typeof firstNumber === "number" && typeof secondNumber === "number") {
         return firstNumber + secondNumber;
     } else {
         return "NaN";
     }
 }
 
-function substraction(firstNumber, secondNumber) {
-    if(typeof firstNumber == number && typeof secondNumber == number) {
+function subtraction(firstNumber, secondNumber) {
+    if(typeof firstNumber == "number" && typeof secondNumber == "number") {
         return firstNumber - secondNumber;
     } else {
         return "NaN";
@@ -85,7 +87,7 @@ function multiplication(firstNumber, secondNumber) {
 }
 
 function division(firstNumber, secondNumber) {
-    if(typeof firstNumber == number && typeof secondNumber == number) {
+    if(typeof firstNumber == "number" && typeof secondNumber == "number") {
         return firstNumber / secondNumber;
     } else {
         return "NaN";
@@ -93,5 +95,25 @@ function division(firstNumber, secondNumber) {
 }
 
 function calculate() {
-    
+    for(let i = 0; i < inputtedNumber.length; i++) {
+        if(inputtedOperator[i] === "*") {
+            console.log(multiplication(inputtedNumber[i], inputtedNumber[i + 1]));
+            inputtedNumber.splice(i, 2, multiplication(inputtedNumber[i], inputtedNumber[i + 1]));
+            inputtedOperator.splice(i, 1);
+        } else if (inputtedOperator[i] === "/") {
+            console.log("the result is" + division(inputtedNumber[i], inputtedNumber[i + 1]));
+            inputtedNumber.splice(i, 2, division(inputtedNumber[i], inputtedNumber[i + 1]));
+            inputtedOperator.splice(i, 1);
+        } else if (inputtedOperator[i] === "+") {
+            console.log(addition(inputtedNumber[i], inputtedNumber[i + 1]));
+            inputtedNumber.splice(i, 2, addition(inputtedNumber[i], inputtedNumber[i + 1]));
+            inputtedOperator.splice(i, 1);
+        } else if (inputtedOperator[i] === "-") {
+            console.log(subtraction(inputtedNumber[i], inputtedNumber[i + 1]));
+            inputtedNumber.splice(i, 2, subtraction(inputtedNumber[i], inputtedNumber[i + 1]));
+            inputtedOperator.splice(i, 1);
+        }
+    }
+    if  (inputtedOperator.length !== 0) calculate();
+    else result.innerText = inputtedNumber[0];
 }
