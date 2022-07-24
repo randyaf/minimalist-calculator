@@ -53,6 +53,10 @@ operatorContainer.addEventListener("click", event => {
         } else if (event.target.getAttribute("value") === "-") {
             operator = "-";
         } else if (event.target.getAttribute("value") === "=") {
+            console.log("before calculation start\n" + 
+            " here is the stats:\n");
+            console.log(inputtedNumber);
+            console.log(inputtedOperator);
             calculate();
         }
     }
@@ -95,25 +99,36 @@ function division(firstNumber, secondNumber) {
 }
 
 function calculate() {
+    // find for the entire array element of inputtedOperator to check if it has multiplication or division
     for(let i = 0; i < inputtedNumber.length; i++) {
         if(inputtedOperator[i] === "*") {
             console.log(multiplication(inputtedNumber[i], inputtedNumber[i + 1]));
             inputtedNumber.splice(i, 2, multiplication(inputtedNumber[i], inputtedNumber[i + 1]));
             inputtedOperator.splice(i, 1);
-        } else if (inputtedOperator[i] === "/") {
-            console.log("the result is" + division(inputtedNumber[i], inputtedNumber[i + 1]));
+            console.log("multiplication executed");
+        } else if(inputtedOperator[i] === "/") {
+            console.log(division(inputtedNumber[i], inputtedNumber[i + 1]));
             inputtedNumber.splice(i, 2, division(inputtedNumber[i], inputtedNumber[i + 1]));
             inputtedOperator.splice(i, 1);
-        } else if (inputtedOperator[i] === "+") {
+            console.log("division executed");
+        } 
+    }
+
+    for(let i = 0; i < inputtedNumber.length; i++) {
+    // find for the entire array element of inputtedOperator to check if it has addition or subtraction
+        if (inputtedOperator[i] === "+") {
             console.log(addition(inputtedNumber[i], inputtedNumber[i + 1]));
             inputtedNumber.splice(i, 2, addition(inputtedNumber[i], inputtedNumber[i + 1]));
             inputtedOperator.splice(i, 1);
+            console.log("addition executed");
         } else if (inputtedOperator[i] === "-") {
             console.log(subtraction(inputtedNumber[i], inputtedNumber[i + 1]));
             inputtedNumber.splice(i, 2, subtraction(inputtedNumber[i], inputtedNumber[i + 1]));
             inputtedOperator.splice(i, 1);
+            console.log("subtraction executed");
         }
     }
+
     if  (inputtedOperator.length !== 0) calculate();
     else result.innerText = inputtedNumber[0];
 }
