@@ -2,6 +2,7 @@ let result = document.querySelector(".calculation-display");
 
 let numberButtonContainer = document.querySelector(".number-button-container");
 let operatorContainer = document.querySelector(".operator-container");
+let clearButton = document.querySelector(".clear-button");
 
 let inputtedNumber = [];
 let inputtedOperator = [];
@@ -63,6 +64,16 @@ operatorContainer.addEventListener("click", event => {
     console.log(inputtedNumber);
     console.log(inputtedOperator);
     isNumberButtonPressed = false;
+});
+
+
+clearButton.addEventListener("click", function() {
+    result.innerText = "";
+    inputtedNumber = [];
+    inputtedOperator = [];
+    isNumberButtonPressed = false;
+    isOperatorPressed = false;
+    operator = "";
 });
 
 
