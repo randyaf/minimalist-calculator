@@ -6,6 +6,7 @@ let clearButton = document.querySelector(".clear-button");
 
 let inputtedNumber = [];
 let inputtedOperator = [];
+let tempLogCalculationResult = "";
 
 let isOperatorPressed = false;
 let isNumberButtonPressed = false;
@@ -58,8 +59,13 @@ operatorContainer.addEventListener("click", event => {
             " here is the stats:\n");
             console.log(inputtedNumber);
             console.log(inputtedOperator);
+            const tempInputtedNumber = [].concat(inputtedNumber);
+            const tempInputtedOperator = [].concat(inputtedOperator);
             calculate();
+            logToHistory(tempInputtedNumber, tempInputtedOperator);
         }
+
+
     }
     console.log(inputtedNumber);
     console.log(inputtedOperator);
@@ -141,5 +147,30 @@ function calculate() {
     }
 
     if  (inputtedOperator.length !== 0) calculate();
-    else result.innerText = inputtedNumber[0];
+    else {
+        result.innerText = inputtedNumber[0];
+        tempLogCalculationResult = result.innerText.toString();
+        console.log("here is tempt var need: " + result.innerText);
+    }
+}
+function logToHistory(arrInputtedNumbers, arrInputtedOperators) {
+    // let loggedFormula = [];
+    let loggedFormulaStr = "";
+    for(let i = 0; i < arrInputtedNumbers.length; i++) {
+        // possible solution with array
+        // loggedFormula.push(arrInputtedNumbers[i]);
+        // if(i < arrInputtedOperators.length) loggedFormula.push(arrInputtedOperators[i]);
+
+        loggedFormulaStr = loggedFormulaStr.concat( " " + arrInputtedNumbers[i]);
+        if(i < arrInputtedOperators.length) loggedFormulaStr = loggedFormulaStr.concat(" " + arrInputtedOperators[i]);
+        console.log(loggedFormulaStr);
+    }
+
+    // adding calculation result to loggedFormulaStr to be displayed as calculation history
+    loggedFormulaStr = loggedFormulaStr.concat(" = " + tempLogCalculationResult);
+
+    const resultBottomDisplay = document.querySelector(".result-bottom-display");
+    const newChildElement = document.createElement("div");
+    newChildElement.innerText = loggedFormulaStr;
+    resultBottomDisplay.insertBefore(newChildElement, resultBottomDisplay.firstChild);
 }
